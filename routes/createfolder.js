@@ -18,11 +18,21 @@ db.query('INSERT INTO directory SET ?',directory,function(error,results,fields){
   if(error)
     throw error;
   else
-  {
+  { 
     console.log("directory RECORD ADDED!");
   }
 });
-  //res.redirect('/dashboard');
+
+db.query("SELECT * FROM `directory` WHERE `parent` = '" + req.body.parent + "'",function(err,result){
+        if (err)throw err;
+        console.log(result);  
+        res.render('dashboard',{
+          res:result,
+          globalpname:req.body.parent
+        });
+    }); 
+
+  // res.render('/dashboard');
 });
 
 module.exports = router;

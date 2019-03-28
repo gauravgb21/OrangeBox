@@ -5,8 +5,10 @@ function createFolder(pname){
         type:'POST',
         data:{name:name,parent:pname},
         success: function(result){
+        	$("body").html(result);
         	console.log("folder creation request sent successfully!");
-        	location.reload();
+        	// console.log(result);
+        	// location.reload();
         }
 	});
 	//console.log(name);
