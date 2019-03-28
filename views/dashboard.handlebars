@@ -68,6 +68,11 @@
             color: #00aeff;
         }
 
+        .newbtn:hover {
+            background-color: orange!important;
+            color: white!important
+        }
+
     </style>
 </head>
 <body>
@@ -250,8 +255,10 @@
                         <div class="col-xl-12">
                             <div class="card" style="padding-bottom: 1rem">
                                 <div class="card-body">
-                                    <h4 class="box-title" style="display: inline">{{globalpname}} </h4>
-                                    <button style="background-color: orange; color: white; border:none; padding: 5px;float: right; box-shadow: 2px 2px lightgray; cursor: pointer"  data-toggle="modal" data-target="#newFolderModal">New Folder <i class="fa fa-plus"></i> </button>
+                                    {{#if navback}}
+                                        <i class="fas fa-arrow-circle-left" style="color: darkorange; font-size: 30px; cursor: pointer" onclick="openFolder('{{navback}}')"></i>
+                                    {{/if}}
+                                    <button class="newbtn" style="background-color: transparent; color: darkorange; border-top: 1px solid darkorange; padding: 9px; float: right; cursor: pointer; border-bottom: 1px solid darkorange; border-left: 0; border-right: 0;"  data-toggle="modal" data-target="#newFolderModal">New Folder <i class="fa fa-plus"></i> </button>
                                 </div>
                                 <div class="row card-body-- " >
                                     {{#each res}}
