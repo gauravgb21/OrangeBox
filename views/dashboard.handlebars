@@ -257,8 +257,8 @@
                                     {{#each res}}
                                     {{#ifCond this.type 1}}
                                     <div class="col-lg-2 col-md-2 m-2 p-2 ml-4"  style="height: 150px; overflow: hidden"> 
-                                            <div class="card" style="height: 100%; width: 150px">
-                                                <div style="height: 110px;cursor: pointer;" onclick="openFolder('{{this.id}}')">
+                                            <div class="card file-right" id="{{this.id}}" style="height: 100%; width: 150px">
+                                                <div style="height: 110px;cursor: pointer;" ondblclick="openFolder('{{this.id}}')">
                                                     <i class="fas fa-folder font-design" style="color: #ff8700; padding-top: 1rem"></i>
                                                 </div>
                                                 <div style="font-size: 12px; margin: 0 1rem; text-align: center">
@@ -269,7 +269,7 @@
                                     {{else}}
                                     <a href="{{this.link}}">
                                     <div class="col-lg-2 col-md-2 m-2 p-2 ml-4"  style="height: 150px; overflow: hidden"> 
-                                        <div class="card" style="height: 100%; width: 150px">
+                                        <div class="card file-right" id="{{this.id}}" style="height: 100%; width: 150px">
                                             <div style="height: 110px">
                                                 <i class="fa fa-file font-design" style="color: #ff8700; padding-top: 1rem"></i>
                                             </div>
@@ -280,11 +280,19 @@
                                     </div>
                                     </a>
                                     {{/ifCond}}
+                                    <div class="dropdown-menu dropdown-menu-sm" id="context-menu">
+                                      <a class="dropdown-item" href="#" style="background-color: crimson; color: white" >Delete</a>
+                                    </div>
                                     {{/each}}                                   
                                     <div class="col-lg-2" data-toggle="modal" data-target="#myModal">
                                         <i class="fas fa-upload" style="font-size: 60px; color: orange; border: 4px dotted; padding: 2rem; margin: 2rem; border-radius: 12px; cursor: pointer; margin-top: 1rem"> </i>
                                     </div>
                                 </div>
+
+
+
+
+
 
                             </div> <!-- /.card -->
                         </div>  <!-- /.col-lg-8 -->
@@ -391,6 +399,35 @@
     <script type="text/javascript" src="assets/js/createfolder.js"></script>
     <script type="text/javascript" src="assets/js/openfolder.js"></script>
     <!--Local Stuff-->
+    <script type="text/javascript">
+        var deleteFolderID;
+        $('.file-right').on('contextmenu', function(e) {
+          // console.log(e.currentTarget.id);
+          deleteFolderID= e.currentTarget.id;
+          var top = e.pageY - 25;
+          var left = e.pageX - 90;
+          $("#context-menu").css({
+            display: "block",
+            top: top,
+            left: left
+          }).addClass("show");
+          return false; //blocks default Webbrowser right click menu
+        }).on("click", function() {
+          $("#context-menu").removeClass("show").hide();
+        });
+
+        $("#context-menu a").on("click", function() {
+            console.log(deleteFolderID);
+            // Gaurav Delete
+            // deleteFolderID contains the id of folder
+            // deleteFolder(deleteFolderID)
+        });
+
+        $(window).click(function(e) {
+           $("#context-menu").removeClass("show").hide();
+        });
+
+    </script>
     <script>
         jQuery(document).ready(function($) {
             "use strict";
