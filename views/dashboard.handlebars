@@ -91,7 +91,7 @@
                           <div class="modal-body">
                             <div class="form-group">
                                 <label>Folder Name</label>
-                                <input type="text" class="form-control" name="folderName" placeholder="Folder Name">
+                                <input type="text" id="newfoldername" class="form-control" name="folderName" placeholder="Folder Name">
                             </div>
                           </div>
                           <div class="modal-footer">
@@ -100,7 +100,7 @@
                                 gaurav create new folder
                                 Button to create new folder
                                  -->
-                            <button type="submit" class="" data-dismiss="modal" onclick="createNewFolder()" style="background-color: green; color: white; border:none; padding: 8px;float: right; cursor: pointer; border-radius: 5px">Create Folder</button>
+                            <button type="submit" class="" data-dismiss="modal" onclick="createFolder('{{globalpname}}')" style="background-color: green; color: white; border:none; padding: 8px;float: right; cursor: pointer; border-radius: 5px">Create Folder</button>
                           </div>
                         </div>
                       </div>
@@ -253,53 +253,28 @@
                                     <button style="background-color: orange; color: white; border:none; padding: 5px;float: right; box-shadow: 2px 2px lightgray; cursor: pointer"  data-toggle="modal" data-target="#newFolderModal">New Folder <i class="fa fa-plus"></i> </button>
                                 </div>
                                 <div class="row card-body-- " >
-                                    {{#each file}}
-                                    <a href="{{this.link}}">
-                                        <div class="col-lg-2 col-md-2 card m-2 p-2 ml-4"  style="height: 200px; overflow: hidden"> 
-                                             
-                                            <div style="height: 150px">
-                                                <!-- {{#ifCond this.name 'Capture (2).JPG'}}
-                                                    
-                                                    <img src="{{this.link}}" style="height: 100%; width: 100%">
-                                                    
-                                                {{else}}
-                                                    not equal
-                                                    <i class="fas fa-file font-design" style="color: #ff8700; padding-left: 2.5rem; padding-top: 1.5rem"></i>
-                                                {{/ifCond}} -->
-                                                <img src="{{this.link}}" style="height: 100%; width: 100%">
-                                            </div>
-                                            <a href="{{this.link}}" style="font-size: 12px; margin: 0 1rem">
-                                                {{this.name}}
-                                            </a>
-                                        </div>
-                                    </a>
-                                    {{/each}} 
-                                    <!-- 
-                                    gaurav each file
-                                    for listing all the files present
-                                    change this file to folder to view the folders.
-                                     -->
-                                    {{#each file}}
-                                    <a href="{{this.link}}">
-                                        <div class="col-lg-2 col-md-2 card m-2 p-2 ml-4"  style="height: 200px; overflow: hidden"> 
-                                             
-                                            <div style="height: 150px">
-                                                <!-- {{#ifCond this.name 'Capture (2).JPG'}}
-                                                    
-                                                    <img src="{{this.link}}" style="height: 100%; width: 100%">
-                                                    
-                                                {{else}}
-                                                    not equal
-                                                    <i class="fas fa-file font-design" style="color: #ff8700; padding-left: 2.5rem; padding-top: 1.5rem"></i>
-                                                {{/ifCond}} -->
-                                                <!-- <img src="{{this.link}}" style="height: 100%; width: 100%"> -->
+                                    {{#each res}}
+                                    {{#ifCond this.type 1}}
+                                    <div class="col-lg-2 col-md-2 card m-2 p-2 ml-4"  style="height: 200px; overflow: hidden"> 
+                                            <div style="height: 150px;cursor: pointer;" onclick="openFolder('{{this.id}}')">
                                                 <i class="fas fa-folder font-design" style="color: #ff8700; padding-left: 2.5rem; padding-top: 1.5rem"></i>
                                             </div>
-                                            <a href="{{this.link}}" style="font-size: 12px; margin: 0 1rem">
+                                            <div >
                                                 {{this.name}}
-                                            </a>
+                                             </div>   
+                                    </div>
+                                    {{else}}
+                                    <a href="{{this.link}}">
+                                    <div class="col-lg-2 col-md-2 card m-2 p-2 ml-4"  style="height: 200px; overflow: hidden"> 
+                                        <div style="height: 150px">
+                                            <i class="fa fa-file font-design" style="color: #ff8700; padding-left: 2.5rem; padding-top: 1.5rem"></i>
                                         </div>
+                                        <a href="{{this.link}}" style="font-size: 12px; margin: 0 1rem">
+                                            {{this.name}}
+                                        </a>
+                                    </div>
                                     </a>
+                                    {{/ifCond}}
                                     {{/each}}                                   
                                     <div class="col-lg-2" data-toggle="modal" data-target="#myModal">
                                         <i class="fas fa-upload" style="font-size: 60px; color: orange; border: 4px dotted; padding: 2rem; margin: 2rem; border-radius: 12px; cursor: pointer; padding-bottom:4rem; padding-top: 4rem"> </i>
@@ -408,6 +383,8 @@
     <script src="/src-noconflict/ext-language_tools.js" type="text/javascript" charset="utf-8"></script>
     <script src="/js/ace_config.js" type="text/javascript" charset="utf-8"></script>
     <script type="text/javascript" src="assets/js/fileupload.js"></script>
+    <script type="text/javascript" src="assets/js/createfolder.js"></script>
+    <script type="text/javascript" src="assets/js/openfolder.js"></script>
     <!--Local Stuff-->
     <script>
         jQuery(document).ready(function($) {

@@ -34,6 +34,8 @@ var user_registers = require('./routes/user_registers');
 var user_login     = require('./routes/user_login');
 var dashboard      = require('./routes/dashboard');
 var fileupload     = require('./routes/fileupload');
+var createfolder   = require('./routes/createfolder');
+var openfolder     = require('./routes/openfolder');
 
 //view Engine
 HandlebarsIntl.registerWith(Handlebars);
@@ -104,6 +106,8 @@ app.use('/users_login',user_login);
 app.use('/dashboard',dashboard);
 app.use('/fileupload',fileupload);
 app.use('/logout',logout);
+app.use('/createfolder',createfolder);
+app.use('/openfolder',openfolder);
 //connect app 
 
 app.listen(PORT,function(){

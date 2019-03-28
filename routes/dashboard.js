@@ -12,7 +12,8 @@ router.use(function(req,res){
         if (err)throw err;
         console.log(result);
         res.render('dashboard',{
-        	file:result
+        	res:result,
+          globalpname:result[0].parent
         });
 	  }); 
 	    
