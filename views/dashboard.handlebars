@@ -73,7 +73,7 @@
 <body>
 
                        
-                        <button type="submit" name="login" value="login" class="btn btn-success btn-flat m-b-30 m-t-30">Sign in</button>
+                        <!-- <button type="submit" name="login" value="login" class="btn btn-success btn-flat m-b-30 m-t-30">Sign in</button> -->
                         
                    
                 <form style="max-width: 350px;" method="post" action="">
@@ -130,8 +130,9 @@
                           
                         </div>
                       </div>
+
     <!-- Left Panel -->
-    <aside id="left-panel" class="left-panel">
+   <!--  <aside id="left-panel" class="left-panel">
         <nav class="navbar navbar-expand-sm navbar-default">
             <div id="main-menu" class="main-menu collapse navbar-collapse">
                 <ul class="nav navbar-nav">
@@ -178,9 +179,9 @@
                     </li>
 
                 </ul>
-            </div><!-- /.navbar-collapse -->
+            </div>
         </nav>
-    </aside>
+    </aside> -->
     <!-- /#left-panel -->
     <!-- Right Panel -->
     <div id="right-panel" class="right-panel" style="background-color: transparent;">
@@ -249,35 +250,39 @@
                         <div class="col-xl-12">
                             <div class="card" style="padding-bottom: 1rem">
                                 <div class="card-body">
-                                    <h4 class="box-title" style="display: inline">{current Folder} </h4>
+                                    <h4 class="box-title" style="display: inline">{{globalpname}} </h4>
                                     <button style="background-color: orange; color: white; border:none; padding: 5px;float: right; box-shadow: 2px 2px lightgray; cursor: pointer"  data-toggle="modal" data-target="#newFolderModal">New Folder <i class="fa fa-plus"></i> </button>
                                 </div>
                                 <div class="row card-body-- " >
                                     {{#each res}}
                                     {{#ifCond this.type 1}}
-                                    <div class="col-lg-2 col-md-2 card m-2 p-2 ml-4"  style="height: 200px; overflow: hidden"> 
-                                            <div style="height: 150px;cursor: pointer;" onclick="openFolder('{{this.id}}')">
-                                                <i class="fas fa-folder font-design" style="color: #ff8700; padding-left: 2.5rem; padding-top: 1.5rem"></i>
-                                            </div>
-                                            <div >
-                                                {{this.name}}
-                                             </div>   
+                                    <div class="col-lg-2 col-md-2 m-2 p-2 ml-4"  style="height: 150px; overflow: hidden"> 
+                                            <div class="card" style="height: 100%; width: 150px">
+                                                <div style="height: 110px;cursor: pointer;" onclick="openFolder('{{this.id}}')">
+                                                    <i class="fas fa-folder font-design" style="color: #ff8700; padding-top: 1rem"></i>
+                                                </div>
+                                                <div style="font-size: 12px; margin: 0 1rem; text-align: center">
+                                                    {{this.name}}
+                                                 </div>
+                                            </div>   
                                     </div>
                                     {{else}}
                                     <a href="{{this.link}}">
-                                    <div class="col-lg-2 col-md-2 card m-2 p-2 ml-4"  style="height: 200px; overflow: hidden"> 
-                                        <div style="height: 150px">
-                                            <i class="fa fa-file font-design" style="color: #ff8700; padding-left: 2.5rem; padding-top: 1.5rem"></i>
+                                    <div class="col-lg-2 col-md-2 m-2 p-2 ml-4"  style="height: 150px; overflow: hidden"> 
+                                        <div class="card" style="height: 100%; width: 150px">
+                                            <div style="height: 110px">
+                                                <i class="fa fa-file font-design" style="color: #ff8700; padding-top: 1rem"></i>
+                                            </div>
+                                            <a href="{{this.link}}" style="font-size: 12px; margin: 0 1rem; overflow: hidden;">
+                                                {{this.name}}
+                                            </a>
                                         </div>
-                                        <a href="{{this.link}}" style="font-size: 12px; margin: 0 1rem">
-                                            {{this.name}}
-                                        </a>
                                     </div>
                                     </a>
                                     {{/ifCond}}
                                     {{/each}}                                   
                                     <div class="col-lg-2" data-toggle="modal" data-target="#myModal">
-                                        <i class="fas fa-upload" style="font-size: 60px; color: orange; border: 4px dotted; padding: 2rem; margin: 2rem; border-radius: 12px; cursor: pointer; padding-bottom:4rem; padding-top: 4rem"> </i>
+                                        <i class="fas fa-upload" style="font-size: 60px; color: orange; border: 4px dotted; padding: 2rem; margin: 2rem; border-radius: 12px; cursor: pointer; margin-top: 1rem"> </i>
                                     </div>
                                 </div>
 
