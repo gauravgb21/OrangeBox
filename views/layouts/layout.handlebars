@@ -54,8 +54,21 @@
 {{/if}}
 
 {{{body}}}
+
+
+<script src="https://www.gstatic.com/firebasejs/4.9.1/firebase.js"></script>
+<script type="text/javascript">
+    var config = {
+      apiKey: 'AIzaSyBiQFWX-K78Uj49N--rMF8z5piALyLWHXo',
+      authDomain: 'ithink-fbc4c.firebaseapp.com',
+      databaseURL: 'https://ithink-fbc4c.firebaseio.com',
+      storageBucket: 'ithink-fbc4c.appspot.com'
+    };
+    firebase.initializeApp(config);
+    var storage = firebase.storage();
+</script>
 <script>
-/* When the user clicks on the button, 
+/* When the user clicks on the button,
 toggle between hiding and showing the dropdown content */
 function myFunction() {
     document.getElementById("myDropdown1").classList.toggle("show");
@@ -76,6 +89,5 @@ window.onclick = function(event) {
   }
 }
 </script>
-
 </body>
 </html>

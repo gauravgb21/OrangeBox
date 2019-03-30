@@ -7,14 +7,15 @@ var db      = require('../mysql_database/db');
 router.use(function(req,res){
   var url  = req.body.url;
   var name = req.body.name;
-  
+  var globalpname = req.body.globalpname;
+
   db.query("SELECT * FROM `users` WHERE `username` = '" + req.user.username + "'",function(err,rows){
       if (err)
                 return done(err);
       var directory={
       name:name,
       type:0,
-      parent:rows[0].root_id,
+      parent:globalpname,
       link:url,
       access:1
     }

@@ -10,7 +10,6 @@ router.use(function(req,res){
 
       db.query("SELECT * FROM `directory` WHERE `parent` = '" + rows[0].root_id + "'",function(err,result){
         if (err)throw err;
-        console.log(result);
 
         res.render('dashboard',{
         	res:result,

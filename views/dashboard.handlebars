@@ -4,6 +4,11 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <title>Orange Box</title>
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+
+  <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
   <style>
     #weatherWidget .currentDesc {
         color: #ffffff!important;
@@ -75,14 +80,14 @@
 
     </style>
 </head>
-<body>
+<body >
 
-                       
+
                         <!-- <button type="submit" name="login" value="login" class="btn btn-success btn-flat m-b-30 m-t-30">Sign in</button> -->
-                        
-                   
+
+
                 <form style="max-width: 350px;" method="post" action="">
-                    
+
                     <!-- Modal -->
                     <div class="modal fade" id="newFolderModal" tabindex="-1" role="dialog" aria-labelledby="newFolderModalLabel" aria-hidden="true">
                       <div class="modal-dialog" role="document">
@@ -101,7 +106,7 @@
                           </div>
                           <div class="modal-footer">
                             <button type="button" class="" data-dismiss="modal" style="background-color: red; color: white; border:none; padding: 8px;float: right; cursor: pointer; border-radius: 5px">Close</button>
-                            <!-- 
+                            <!--
                                 gaurav create new folder
                                 Button to create new folder
                                  -->
@@ -114,7 +119,7 @@
 
                     <div class="modal fade" id="myModal" role="dialog" style="z-index: 2000">
                         <div class="modal-dialog">
-                        
+
                           <!-- Modal content-->
                           <div class="modal-content">
                             <div class="modal-header" style="">
@@ -128,11 +133,11 @@
                               </div>
                             </div>
                             <div class="modal-footer">
-                              
-                              <button class="" style="border:1px solid lightgray; background-color: orange; padding: 10px;font-size: 1.2em; color: white; cursor: pointer; border-radius: 10px" onclick="uploadFile()">Submit</button>
+
+                              <button class="" style="border:1px solid lightgray; background-color: orange; padding: 10px;font-size: 1.2em; color: white; cursor: pointer; border-radius: 10px" onclick="uploadFile({{globalpname}})">Submit</button>
                             </div>
                           </div>
-                          
+
                         </div>
                       </div>
 
@@ -151,7 +156,7 @@
                             <li><i class="ti-folder"></i><a href="index.html">Video</a></li>
 
                             <li><i class="ti-folder"></i><a href="index.html">Pictures</a></li>
-                            
+
                         </ul>
                     </li>
 
@@ -170,7 +175,7 @@
                     <li>
                         <a href="index.html"> <i class="menu-icon ti-trash"></i>Trash </a>
                     </li>
-                    
+
                     <li style="border-bottom: 1px solid lightgray">
                         <span style="color: white">.</span>
                     </li>
@@ -194,16 +199,16 @@
         <header id="header" class="header">
             <div class="top-left">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="./" style="height: 20px"><img src="images/logo.png" alt="Logo"></a>
+                    <a class="navbar-brand" href="./" style="height: 20px"><img src="./images/logo.png" alt="Logo"></a>
                     <a class="navbar-brand hidden" href="./"><img src="images/logo2.png" alt="Logo"></a>
                 </div>
             </div>
             <div class="top-right">
                 <div class="header-menu">
                     <div class="header-left">
-                        
 
-                        <div class="dropdown for-notification">
+
+                        <!-- <div class="dropdown for-notification">
                             <button class="btn btn-secondary dropdown-toggle" type="button" id="notification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fa fa-bell"></i>
                                 <span class="count bg-danger">3</span>
@@ -223,18 +228,15 @@
                                     <p>Server #3 overloaded.</p>
                                 </a>
                             </div>
-                        </div>
+                        </div> -->
 
-                        
+
 
                     <div class="user-area dropdown float-right">
-                        <a href="#" class="dropdown-toggle active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <img class="user-avatar rounded-circle" src="images/admin.png" alt="User Avatar">
-                        </a>
+                        <a class="nav-link" href="/logout"><i class="fa fa-power -off"></i>Logout</a>
 
                         <div class="user-menu dropdown-menu">
                             <a class="nav-link" href="#"><i class="fa fa- user"></i>{{user.name}}</a>
-                            <a class="nav-link" href="/logout"><i class="fa fa-power -off"></i>Logout</a>
                         </div>
                     </div>
 
@@ -249,33 +251,38 @@
                 <div class="clearfix"></div>
                 <!-- Orders -->
 
-                
+
                 <div class="orders">
                     <div class="row">
                         <div class="col-xl-12">
                             <div class="card" style="padding-bottom: 1rem">
                                 <div class="card-body">
-                                    {{#if navback}}
-                                        <i class="fas fa-arrow-circle-left" style="color: darkorange; font-size: 30px; cursor: pointer" onclick="openFolder('{{navback}}')"></i>
-                                    {{/if}}
+                                        <a href="javascript:javascript:history.go(-1)">
+                                            <i class="fas fa-arrow-circle-left" style="color: darkorange; font-size: 30px; cursor: pointer" ></i>
+                                        </a>
+                                        {{globalpname}}
                                     <button class="newbtn" style="background-color: transparent; color: darkorange; border-top: 1px solid darkorange; padding: 9px; float: right; cursor: pointer; border-bottom: 1px solid darkorange; border-left: 0; border-right: 0;"  data-toggle="modal" data-target="#newFolderModal">New Folder <i class="fa fa-plus"></i> </button>
                                 </div>
                                 <div class="row card-body-- " >
                                     {{#each res}}
+
                                     {{#ifCond this.type 1}}
-                                    <div class="col-lg-2 col-md-2 m-2 p-2 ml-4"  style="height: 150px; overflow: hidden"> 
+                                    <div class="col-lg-2 col-md-2 m-2 p-2 ml-4"  style="height: 150px; overflow: hidden">
                                             <div class="card file-right" id="{{this.id}}" style="height: 100%; width: 150px">
-                                                <div style="height: 110px;cursor: pointer;" ondblclick="openFolder('{{this.id}}')">
+                                                <div style="height: 110px;cursor: pointer;" >
                                                     <i class="fas fa-folder font-design" style="color: #ff8700; padding-top: 1rem"></i>
                                                 </div>
                                                 <div style="font-size: 12px; margin: 0 1rem; text-align: center">
-                                                    {{this.name}}
+                                                    <a class="nav-link" href="/openfolder/{{this.id}}">{{this.name}}</a>
+                                                    <a class="" href="/makeshare/{{this.id}}" target="_blank" style="width: fit-content; position: absolute; top: 5px; right: 10px; font-size: 15px; border: 1px solid #2d2d2d; padding: 3px 7px; border-radius: 50%;" >
+                                                        <i class="fas fa-share"></i>
+                                                    </a>
                                                  </div>
-                                            </div>   
+                                            </div>
                                     </div>
                                     {{else}}
                                     <a href="{{this.link}}">
-                                    <div class="col-lg-2 col-md-2 m-2 p-2 ml-4"  style="height: 150px; overflow: hidden"> 
+                                    <div class="col-lg-2 col-md-2 m-2 p-2 ml-4"  style="height: 150px; overflow: hidden">
                                         <div class="card file-right" id="{{this.id}}" style="height: 100%; width: 150px">
                                             <div style="height: 110px">
                                                 <i class="fa fa-file font-design" style="color: #ff8700; padding-top: 1rem"></i>
@@ -283,14 +290,17 @@
                                             <a href="{{this.link}}" style="font-size: 12px; margin: 0 1rem; overflow: hidden;">
                                                 {{this.name}}
                                             </a>
+                                                <a class="" href="/makeshare/{{this.id}}" target="_blank" style="width: fit-content; position: absolute; top: 5px; right: 10px; font-size: 15px; border: 1px solid #2d2d2d; padding: 3px 7px; border-radius: 50%;" >
+                                                    <i class="fas fa-share"></i>
+                                                </a>
                                         </div>
                                     </div>
                                     </a>
                                     {{/ifCond}}
                                     <div class="dropdown-menu dropdown-menu-sm" id="context-menu">
-                                      <a class="dropdown-item" href="#" style="background-color: crimson; color: white" >Delete</a>
+                                      <a class="dropdown-item del" href="#" style="background-color: crimson; color: white" >Delete</a>
                                     </div>
-                                    {{/each}}                                   
+                                    {{/each}}
                                     <div class="col-lg-2" data-toggle="modal" data-target="#myModal">
                                         <i class="fas fa-upload" style="font-size: 60px; color: orange; border: 4px dotted; padding: 2rem; margin: 2rem; border-radius: 12px; cursor: pointer; margin-top: 1rem"> </i>
                                     </div>
@@ -306,10 +316,10 @@
 
                     </div>
                 </div>
-                
+
                 <!-- <script>
                     Handlebars.registerHelper('ifCond', function(v1, v2, options) {
-                      
+
                       if(v1 === v2) {
                         return options.fn(this);
                       }
@@ -368,7 +378,7 @@
         <div class="clearfix"></div>
         <!-- Footer -->
         <footer class="site-footer">
-            
+
         </footer>
         <!-- /.site-footer -->
     </div>
@@ -399,18 +409,16 @@
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@3.9.0/dist/fullcalendar.min.js"></script>
     <script src="assets/js/init/fullcalendar-init.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
-    <script src="/src-noconflict/ext-language_tools.js" type="text/javascript" charset="utf-8"></script>
-    <script src="/js/ace_config.js" type="text/javascript" charset="utf-8"></script>
     <script type="text/javascript" src="assets/js/fileupload.js"></script>
     <script type="text/javascript" src="assets/js/createfolder.js"></script>
     <script type="text/javascript" src="assets/js/openfolder.js"></script>
+    <script type="text/javascript" src="assets/js/deleteFolder.js"></script>
     <!--Local Stuff-->
     <script type="text/javascript">
-        var deleteFolderID;
+        var folderID;
         $('.file-right').on('contextmenu', function(e) {
           // console.log(e.currentTarget.id);
-          deleteFolderID= e.currentTarget.id;
+          folderID= e.currentTarget.id;
           var top = e.pageY - 25;
           var left = e.pageX - 90;
           $("#context-menu").css({
@@ -423,11 +431,20 @@
           $("#context-menu").removeClass("show").hide();
         });
 
-        $("#context-menu a").on("click", function() {
-            console.log(deleteFolderID);
+        $("#context-menu .del").on("click", function() {
+            console.log(folderID);
             // Gaurav Delete
             // deleteFolderID contains the id of folder
-            // deleteFolder(deleteFolderID)
+            deleteFolder(folderID);
+        });
+
+        $("#context-menu .share").on("click", function() {
+            // Gaurav Delete
+            // deleteFolderID contains the id of folder
+            var url= "localhost:8090/makeshare/"+ folderID;
+            // console.log(url);
+            // window.location.href= url;
+            window.open(url,'_blank');
         });
 
         $(window).click(function(e) {
@@ -626,16 +643,57 @@
             // Bar Chart #flotBarChart End
         });
     </script>
-    <script src="https://www.gstatic.com/firebasejs/4.9.1/firebase.js"></script>
     <script type="text/javascript">
-      var config = {
-        apiKey: 'AIzaSyBiQFWX-K78Uj49N--rMF8z5piALyLWHXo',
-        authDomain: 'ithink-fbc4c.firebaseapp.com',
-        databaseURL: 'https://ithink-fbc4c.firebaseio.com',
-        storageBucket: 'ithink-fbc4c.appspot.com'
-      };
-      firebase.initializeApp(config);
-      var storage = firebase.storage();
+    $(document).ready(function(){
+        $("#file").on("change",function(event){
+            selectedFile=event.target.files[0];
+        });
+    });
+    function uploadFile(globalpname){
+    //create root reference
+    var filename = selectedFile.name;
+    var storageRef=firebase.storage().ref('/profileImages/'+ filename);
+    console.log("storage ref is");
+    console.log(storageRef);
+    var uploadTask= storageRef.put(selectedFile);
+
+     // Register three observers:
+    // 1. 'state_changed' observer, called any time the state changes
+    // 2. Error observer, called on failure
+    // 3. Completion observer, called on successful completion
+    uploadTask.on('state_changed', function(snapshot){
+      // Observe state change events such as progress, pause, and resume
+      // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+      var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+      console.log('Upload is ' + progress + '% done');
+      switch (snapshot.state) {
+        case firebase.storage.TaskState.PAUSED: // or 'paused'
+          console.log('Upload is paused');
+          break;
+        case firebase.storage.TaskState.RUNNING: // or 'running'
+          console.log('Upload is running');
+          break;
+      }
+    }, function(error) {
+      // Handle unsuccessful uploads
+      console.log("there is an error!");
+    }, function() {
+      // Handle successful uploads on complete
+      // For instance, get the download URL: https://firebasestorage.googleapis.com/...
+      var downloadURL = uploadTask.snapshot.downloadURL;
+      // console.log(globalpname)
+       //change dp
+        $.ajax({
+          url: '/fileupload',
+          type: 'POST',
+          data: {url:downloadURL,name:filename, globalpname: globalpname},
+          success: function(result){
+            console.log("request sent to server");
+          }
+        });
+    });
+
+    }
     </script>
 </body>
 </html>

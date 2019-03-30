@@ -36,6 +36,9 @@ var dashboard      = require('./routes/dashboard');
 var fileupload     = require('./routes/fileupload');
 var createfolder   = require('./routes/createfolder');
 var openfolder     = require('./routes/openfolder');
+var deletefolder   = require('./routes/deletefolder');
+var sharefolder    = require('./routes/sharefolder');
+var makeshare      = require('./routes/makeshare');
 
 //view Engine
 HandlebarsIntl.registerWith(Handlebars);
@@ -52,7 +55,8 @@ passportConfig(passport);
 
 //static folders
 app.use(express.static(path.join(__dirname,'public')));
-
+app.use('/openFolder', express.static(__dirname + '/public'));
+app.use('/sharefolder', express.static(__dirname + '/public'));
 
 app.use(cookieParser());
 //Express sessions
@@ -108,7 +112,13 @@ app.use('/fileupload',fileupload);
 app.use('/logout',logout);
 app.use('/createfolder',createfolder);
 app.use('/openfolder',openfolder);
-//connect app 
+app.use('/deletefolder',deletefolder);
+app.use('/sharefolder',sharefolder);
+app.use('/makeshare',makeshare);
+
+
+
+//connect app
 
 app.listen(PORT,function(){
 	console.log('server is listing to 8089');

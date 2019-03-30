@@ -5,8 +5,8 @@ var mysql = require('mysql');
 var con = mysql.createConnection({
    host:'localhost',
    user:'root',
-   password:'password',
-   database:'orangebox' 
+   password:'trex',
+   database:'orangebox'
 });
 
 con.connect(function(err){
