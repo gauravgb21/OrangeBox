@@ -4,6 +4,10 @@ var db      = require('../mysql_database/db');
 //Display dashboard
 
 router.use('/:folderid',function(req,res){
+  if(req.user == null){
+    res.redirect('/');
+  }
+  else{
     var fid = req.params.folderid;
     console.log(fid);
     //set user object here as well
@@ -22,6 +26,7 @@ router.use('/:folderid',function(req,res){
             res.send('Access Denied');
         }
     });
+  }
 });
 
 module.exports = router;

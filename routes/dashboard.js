@@ -5,6 +5,10 @@ var db      = require('../mysql_database/db');
 
 router.use(function(req,res){
   //set user object here as well
+  if(req.user == null){
+    res.redirect('/');
+  }
+  else{
   db.query("SELECT * FROM `users` WHERE `username` = '" + req.user.username + "'",function(err,rows){
       if (err)throw err;
 
@@ -18,6 +22,7 @@ router.use(function(req,res){
 	  });
 
   });
+}
 });
 
 module.exports = router;

@@ -4,6 +4,10 @@ var db      = require('../mysql_database/db');
 //Display dashboard
 
 router.use('/:folderid',function(req,res){
+    if(req.user == null){
+        res.redirect('/');
+    }
+    else{
     console.log("here");
     var fid = req.params.folderid;
     db.query("UPDATE directory SET access = ? WHERE id = ?",[0,fid],function(err,result){
@@ -14,6 +18,7 @@ router.use('/:folderid',function(req,res){
         var tmpurl = "/sharefolder/"+fid;
         res.redirect(tmpurl);
     });
+}
 });
 
 
