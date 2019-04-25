@@ -11,7 +11,7 @@ var storageRef=firebase.storage().ref('/profileImages/'+ filename);
 console.log("storage ref is");
 console.log(storageRef);
 var uploadTask= storageRef.put(selectedFile);
- 
+
  // Register three observers:
 // 1. 'state_changed' observer, called any time the state changes
 // 2. Error observer, called on failure
@@ -36,7 +36,7 @@ uploadTask.on('state_changed', function(snapshot){
   // Handle successful uploads on complete
   // For instance, get the download URL: https://firebasestorage.googleapis.com/...
   var downloadURL = uploadTask.snapshot.downloadURL;
-   
+
    //change dp
 
     $.ajax({
@@ -44,9 +44,15 @@ uploadTask.on('state_changed', function(snapshot){
       type: 'POST',
       data: {url:downloadURL,name:filename},
       success: function(result){
+        // console.log("result ", result);
+        // $("body").html(result);
+        location.reload(true);
         console.log("request sent to server");
       }
     });
+
+    console.log("here");
+    // console.log("i am here");
 });
 
 }

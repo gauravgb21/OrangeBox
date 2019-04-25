@@ -133,8 +133,7 @@
                               </div>
                             </div>
                             <div class="modal-footer">
-
-                              <button class="" style="border:1px solid lightgray; background-color: orange; padding: 10px;font-size: 1.2em; color: white; cursor: pointer; border-radius: 10px" onclick="uploadFile({{globalpname}})">Submit</button>
+                              <button class="" data-dismiss="modal" style="border:1px solid lightgray; background-color: orange; padding: 10px;font-size: 1.2em; color: white; cursor: pointer; border-radius: 10px" onclick="uploadFile({{globalpname}})">Submit</button>
                             </div>
                           </div>
 
@@ -285,12 +284,29 @@
                                     <div class="col-lg-2 col-md-2 m-2 p-2 ml-4"  style="height: 150px; overflow: hidden">
                                         <div class="card file-right" id="{{this.id}}" style="height: 100%; width: 150px">
                                             <div style="height: 110px">
-                                                <i class="fa fa-file font-design" style="color: #ff8700; padding-top: 1rem"></i>
+                                                {{#ifCond this.extension '.jpg'}}
+                                                    <img src="{{this.link}}" alt="">
+                                                {{else}}
+                                                    {{#ifCond this.extension '.png'}}
+                                                        <img src="{{this.link}}" alt="">
+                                                    {{else}}
+                                                        {{#ifCond this.extension '.pdf'}}
+                                                            <i class="fa fa-file-pdf-o font-design" style="color: #ff8700; padding-top: 1rem"></i>
+                                                        {{else}}
+                                                            {{#ifCond this.extension '.jpeg'}}
+                                                                <img src="{{this.link}}" alt="">
+                                                            {{else}}
+                                                                <i class="fa fa-file font-design" style="color: #ff8700; padding-top: 1rem"></i>
+                                                            {{/ifCond}}
+                                                        {{/ifCond}}
+                                                    {{/ifCond}}
+                                                {{/ifCond}}
                                             </div>
-                                            <a href="{{this.link}}" style="font-size: 12px; margin: 0 1rem; overflow: hidden;">
+                                            <a href="{{this.link}}" style="font-size: 12px; padding: 0 1rem; overflow: hidden; background: whitesmoke; padding-bottom: 3rem">
                                                 {{this.name}}
+
                                             </a>
-                                                <a class="" href="/makeshare/{{this.id}}" target="_blank" style="width: fit-content; position: absolute; top: 5px; right: 10px; font-size: 15px; border: 1px solid #2d2d2d; padding: 3px 7px; border-radius: 50%;" >
+                                                <a class="" href="/makeshare/{{this.id}}" target="_blank" style="width: fit-content; position: absolute; top: 5px; right: 10px; font-size: 15px; border: 1px solid lightgray; padding: 3px 7px; border-radius: 50%; background: whitesmoke; box-shadow: 2px 2px 2px lightgrey; color: gray" >
                                                     <i class="fas fa-share"></i>
                                                 </a>
                                         </div>
@@ -317,7 +333,7 @@
                     </div>
                 </div>
 
-                <!-- <script>
+                <script>
                     Handlebars.registerHelper('ifCond', function(v1, v2, options) {
 
                       if(v1 === v2) {
@@ -325,7 +341,7 @@
                       }
                       return options.inverse(this);
                     });
-                </script> -->
+                </script>
 
                 <!-- /.orders -->
                 <!-- To Do and Live Chat -->
