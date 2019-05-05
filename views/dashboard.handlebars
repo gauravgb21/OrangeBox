@@ -78,6 +78,20 @@
             color: white!important
         }
 
+        #myProgress {
+          width: 100%;
+          background-color: whitesmoke;
+        }
+
+        #myBar {
+          width: 1%;
+          height: 30px;
+          background-color: #eb8a2b;
+        }
+        input[type="file"] {
+            cursor: pointer;
+        }
+
     </style>
 </head>
 <body >
@@ -127,13 +141,18 @@
                               <h4 class="modal-title">Create New File</h4>
                             </div>
                             <div class="modal-body">
+                                <div id="myProgress" >
+                                    <div id="myBar"></div>
+                                </div>
+                                <br>
                               <div class="upload-btn-wrapper" style="margin-left: 30%; ">
-                                  <button class="btn" >Upload a file</button>
-                                  <input type="file" id="file" name="myfile" />
+                                  <input type="file" id="file" name="myfile" style="cursor: pointer; width: 200px; height: 100px" />
+                                  <button class="btn " id="uploadbtn" style="">Select a file</button>
                               </div>
                             </div>
                             <div class="modal-footer">
-                              <button class="" data-dismiss="modal" style="border:1px solid lightgray; background-color: orange; padding: 10px;font-size: 1.2em; color: white; cursor: pointer; border-radius: 10px" onclick="uploadFile({{globalpname}})">Submit</button>
+                                <button type="button" data-dismiss="modal" class="closebutton" style="display: none" name="button"></button>
+                              <button class="" style="border: none; background-color: orange; padding: 10px;font-size: 1em; color: white; cursor: pointer;" onclick="uploadFile({{globalpname}})">Submit</button>
                             </div>
                           </div>
 
@@ -195,11 +214,12 @@
     <!-- Right Panel -->
     <div id="right-panel" class="right-panel" style="background-color: transparent;">
         <!-- Header-->
-        <header id="header" class="header">
+        <header id="header" class="header" style="top: 5px !important">
             <div class="top-left">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="./" style="height: 20px"><img src="./images/logo.png" alt="Logo"></a>
-                    <a class="navbar-brand hidden" href="./"><img src="images/logo2.png" alt="Logo"></a>
+
+                    <a class="navbar-brand " style="display: inline; margin-right: 0!important" href="./"><img style="height: 45px" src="images/oblogo.png" alt="Logo"></a>
+                    <a class="navbar-brand" style="display: inline" href="./" style="height: 20px"><img src="./images/logo.png" alt="Logo"></a>
                 </div>
             </div>
             <div class="top-right">
@@ -317,7 +337,7 @@
                                       <a class="dropdown-item del" href="#" style="background-color: crimson; color: white" >Delete</a>
                                     </div>
                                     {{/each}}
-                                    <div class="col-lg-2" data-toggle="modal" data-target="#myModal">
+                                    <div class="col-lg-2 showuploadbtn" data-toggle="modal" data-target="#myModal">
                                         <i class="fas fa-upload" style="font-size: 60px; color: orange; border: 4px dotted; padding: 2rem; margin: 2rem; border-radius: 12px; cursor: pointer; margin-top: 1rem"> </i>
                                     </div>
                                 </div>
@@ -452,6 +472,9 @@
             // Gaurav Delete
             // deleteFolderID contains the id of folder
             deleteFolder(folderID);
+            setTimeout(function(){
+                location.reload();
+            }, 100);
         });
 
         $("#context-menu .share").on("click", function() {
@@ -660,11 +683,46 @@
         });
     </script>
     <script type="text/javascript">
+    function move(width) {
+      var elem = document.getElementById("myBar");
+      elem.style.width = width + '%';
+      //
+      // var width = 1;
+      // var id = setInterval(frame, 10);
+      // function frame() {
+      //   if (width >= 100) {
+      //     clearInterval(id);
+      //   } else {
+      //     width++;
+      //     elem.style.width = width + '%';
+      //   }
+      // }
+    }
+
+
     $(document).ready(function(){
+        $(".showuploadbtn").click(function() {
+            $("#myProgress").hide();
+            $("#uploadbtn").show();
+        });
+
         $("#file").on("change",function(event){
             selectedFile=event.target.files[0];
+
+            if (selectedFile.name) {
+                $("#myProgress").show();
+                $("#uploadbtn").hide();
+            }
+            else {
+                $("#myProgress").hide();
+                $("#uploadbtn").show();
+            }
         });
+
+
     });
+
+
     function uploadFile(globalpname){
     //create root reference
     var filename = selectedFile.name;
@@ -681,6 +739,40 @@
       // Observe state change events such as progress, pause, and resume
       // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
       var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+      move(progress);
+      if (progress< 10) {
+          move(10);
+      }
+      else if (progress< 20) {
+          move(20);
+      }
+      else if (progress< 30) {
+          move(30);
+      }
+      else if (progress< 30) {
+          move(30);
+      }
+      else if (progress< 40) {
+          move(40);
+      }
+      else if (progress< 50) {
+          move(50);
+      }
+      else if (progress< 60) {
+          move(60);
+      }
+      else if (progress< 70) {
+          move(70);
+      }
+      else if (progress< 80) {
+          move(80);
+      }
+      else if (progress< 90) {
+          move(90);
+      }
+      else if (progress< 100) {
+          move(100);
+      }
       console.log('Upload is ' + progress + '% done');
       switch (snapshot.state) {
         case firebase.storage.TaskState.PAUSED: // or 'paused'
@@ -689,6 +781,12 @@
         case firebase.storage.TaskState.RUNNING: // or 'running'
           console.log('Upload is running');
           break;
+      }
+      if (progress== 100 ) {
+          setTimeout(function(){
+              $('.closebutton').click();
+              location.reload();
+          }, 1000);
       }
     }, function(error) {
       // Handle unsuccessful uploads

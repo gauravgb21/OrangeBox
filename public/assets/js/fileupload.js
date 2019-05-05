@@ -2,6 +2,8 @@ $(document).ready(function(){
     $("#file").on("change",function(event){
         selectedFile=event.target.files[0];
     });
+
+    
 });
 
 function uploadFile(){
